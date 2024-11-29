@@ -1,33 +1,41 @@
-const { validationResult } = require("express-validator");
-const userService = require("../services/user.service"); // Make sure you import userService
+// controllers/user.controller.js
+const userService = require("../services/user.service");
 const { userModel } = require("../models/user.model");
 
-
-
-
-module.exports.registerUser = async (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
+const registerUser = async (req, res, next) => {
+  console.log("1");
 
   try {
-    const { fullname, email, password } = req.body;
-    const hashedPassword = await userModel.hashPassword(password);
+    const { fullname, email, password } = req.validatedData;
+    console.log("2");
 
-    // Call createUser from userService
+    // Hash the password
+    const hashedPassword = await userModel.hashPassword(password);
+    console.log("3");
+
+    // Call createUser from userService to create the user in the database
     const user = await userService.createUser({
-      firstname: fullname.firstname,
-      lastname: fullname.lastname,
+      fullname,
       email,
       password: hashedPassword,
     });
+    console.log("4");
 
-    // Generate token
+    // Generate JWT token for the user
     const token = user.generateAuthToken();
 
+    // Send success response with token and user details
     res.status(201).json({ token, user });
   } catch (error) {
-    next(error); // Pass the error to error handling middleware
+    console.log("Error-----------",);
+    res.json({
+      error: error.message || "Server Error",
+      status: error.status || 500,
+    })
+    
   }
+};
+
+module.exports = {
+  registerUser,
 };

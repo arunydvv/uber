@@ -11,7 +11,6 @@ const fullnameSchema = new mongoose.Schema({
   lastname: {
     type: String,
     minlength: [3, "Last name must be at least 3 characters"],
-    required: false, 
   },
 });
 
@@ -29,19 +28,15 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    select: false,
   },
   socketId: {
     type: String,
-    default: null, // Optional field; default set to null
   },
 });
 
 // Instance methods
 userSchema.methods.generateAuthToken = function () {
-  const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, {
-    expiresIn: "7d",
-  });
+  const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET);
   return token;
 };
 
@@ -54,4 +49,4 @@ userSchema.statics.hashPassword = async function (password) {
   return await bcrypt.hash(password, 10);
 };
 
-module.exports.userModel = mongoose.model("User", userSchema);
+module.exports.userModel = mongoose.model("user", userSchema);
