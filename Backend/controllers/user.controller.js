@@ -1,4 +1,3 @@
-// controllers/user.controller.js
 const userService = require("../services/user.service");
 const { userModel } = require("../models/user.model");
 
@@ -13,7 +12,7 @@ const registerUser = async (req, res, next) => {
     const hashedPassword = await userModel.hashPassword(password);
     console.log("3");
 
-    // Call createUser from userService to create the user in the database
+    /** Call createUser from userService to create the user in the database */
     const user = await userService.createUser({
       fullname,
       email,
@@ -27,12 +26,11 @@ const registerUser = async (req, res, next) => {
     // Send success response with token and user details
     res.status(201).json({ token, user });
   } catch (error) {
-    console.log("Error-----------",);
+    console.log("Error-----------");
     res.json({
       error: error.message || "Server Error",
       status: error.status || 500,
-    })
-    
+    });
   }
 };
 
