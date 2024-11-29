@@ -26,4 +26,4 @@ The request body should contain the following fields:
     "lastname": "Doe"
   },
   "password": "password123"
-}``
+}
