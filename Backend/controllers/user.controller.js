@@ -2,6 +2,9 @@ const { validationResult } = require("express-validator");
 const userService = require("../services/user.service"); // Make sure you import userService
 const { userModel } = require("../models/user.model");
 
+
+
+
 module.exports.registerUser = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

@@ -1,13 +1,14 @@
+const bcrypt = require("bcrypt");
 const userModel = require("../models/user.model");
 
-module.exports.createUser = async ({
-  firstname,
-  lastname,
-  email,
-  password,
-}) => {
+module.exports.createUser = async ({ fullname, email, password }) => {
   // Ensure all fields are provided
-  if (!firstname || !lastname || !email || !password) {
+  if (
+    !fullname ||
+    !fullname.firstname ||
+    !email ||
+    !password
+  ) {
     throw new Error("All fields are required.");
   }
 
@@ -22,14 +23,17 @@ module.exports.createUser = async ({
     throw new Error("User already exists with this email.");
   }
 
+  // Hash the password before saving
+  const hashedPassword = await bcrypt.hash(password, 10);
+
   // Create the new user
   const user = await userModel.create({
     fullname: {
-      firstname,
-      lastname,
+      firstname: fullname.firstname,
+      lastname: fullname.lastname,
     },
     email,
-    password,
+    password: hashedPassword, // Save the hashed password
   });
 
   return user;
