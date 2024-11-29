@@ -2,6 +2,7 @@ const dotenv = require("dotenv");
 const express = require("express");
 const cors = require("cors");
 const userRoutes = require("./routes/user.routes");
+const captainRoutes = require("./routes/captain.routes");
 const connectToMongo = require("./db/db");
 const cookieParser = require("cookie-parser");
 const app = express();
@@ -15,6 +16,7 @@ app.use(cookieParser());
 connectToMongo();
 
 app.use('/users', userRoutes);
+app.use('/captains', captainRoutes);
 
 app.get("/", (req, res) => {
     res.status(200).json({ message: "Hello world" });

@@ -1,13 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const {
-  registerUser,
-  loginUser,
-  getUserProfile,
-  logoutUser,
-} = require("../controllers/user.controller");
-const { registerSchema, loginSchema } = require("../Zod/schema.zod");
-const {authUser} = require("../middlewares/auth.middleware");
+const { registerUser, loginUser, getUserProfile,logoutUser} = require("../controllers/user.controller");
+const { registerSchema, loginSchema,  } = require("../Zod/schema.zod");
+const { authUser } = require("../middlewares/auth.middleware");
 
 // Register route
 router.post(
@@ -18,8 +13,7 @@ router.post(
       const parsedData = registerSchema.parse({ email, fullname, password });
       req.validatedData = parsedData;
       return next(); // Ensures the next middleware (userController.registerUser) is called
-    }
-    catch (error) {
+    } catch (error) {
       return res.status(400).json({
         message:
           "Validation error: " + error.errors.map((e) => e.message).join(", "),
@@ -52,8 +46,5 @@ router.post(
 // Profile route
 router.get("/profile", authUser, getUserProfile);
 router.get("/logout", authUser, logoutUser);
-
-
-
 
 module.exports = router;
