@@ -1,41 +1,22 @@
 // routes/user.routes.js
 const express = require("express");
 const router = express.Router();
-const { z } = require("zod");
 const userController = require("../controllers/user.controller");
+const { registerSchema, loginSchema } = require("../Zod/schema.zod");
 
-// Define Zod schema for validation
-const registerSchema = z.object({
-  email: z.string().email("Invalid email format"), // Improved error message
-  fullname: z.object({
-    firstname: z
-      .string()
-      .min(3, "First name must be at least 3 characters long"),
-    lastname: z.string().min(3, "Last name must be at least 3 characters long"), // Added minimum length validation for lastname
-  }),
-  password: z.string().min(8, "Password must be at least 8 characters long"),
-});
-
-// POST route for user registration
 router.post(
   "/register",
   async (req, res, next) => {
     const { email, fullname, password } = req.body;
-    console.log({ email, fullname, password });
-    console.log("Route entered");
-
     try {
-      // Validate data using Zod schema
       const parsedData = registerSchema.parse({ email, fullname, password });
-      console.log("Parsing successful:----------------", parsedData);
-
-      // Pass validated data to the controller
-      req.validatedData = parsedData;
-      next(); // Proceed to the next middleware
+      req.validatedData = parsedData;  // Important check
+      next(); 
     } catch (error) {
+      console.log(error);
       return res.status(400).json({
-        message: "Validation error",
-        errors: error.errors, // Zod provides detailed error information
+        message: "Validation error1",
+        errors: error.errors, 
       });
     }
   },
@@ -48,9 +29,28 @@ router.post(
   }
 ); 
 
-// Test GET route for "/users"
-router.get("/", (req, res) => {
-  res.send("Hello, user!");
-});
+router.post(
+  "/login",
+  async (req, res, next) => {
+    const { email, password } = req.body;
+    try {
+      const parsedData = loginSchema.parse({ email, password });
+      req.validatedDataLogin = parsedData;
+      next(); 
+    } catch (error) {
+      return res.status(400).json({
+        message: "Invalid Email or password",
+        errors: error.errors,
+      });
+    }
+  },
+  userController.loginUser,
+  (err, req, res, next) => {
+    console.error("Error:", err);
+    res
+      .status(err.statusCode || 500)
+      .json({ message: err.message || "Something went wrong" });
+  }
+); 
 
 module.exports = router;

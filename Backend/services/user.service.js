@@ -9,10 +9,8 @@ const createUser = async ({ fullname, email, password }) => {
     throw new Error("User already exists with this email.");
   }
 
-  // Hash the password before saving
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  // Create the new user
   const user = await userModel.create({
     fullname: {
       firstname: fullname.firstname,
