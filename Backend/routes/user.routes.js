@@ -1,34 +1,36 @@
-// routes/user.routes.js
 const express = require("express");
 const router = express.Router();
-const userController = require("../controllers/user.controller");
+const {
+  registerUser,
+  loginUser,
+  getUserProfile,
+  logoutUser,
+} = require("../controllers/user.controller");
 const { registerSchema, loginSchema } = require("../Zod/schema.zod");
+const {authUser} = require("../middlewares/auth.middleware");
 
+// Register route
 router.post(
   "/register",
   async (req, res, next) => {
     const { email, fullname, password } = req.body;
     try {
       const parsedData = registerSchema.parse({ email, fullname, password });
-      req.validatedData = parsedData;  // Important check
-      next(); 
-    } catch (error) {
-      console.log(error);
+      req.validatedData = parsedData;
+      return next(); // Ensures the next middleware (userController.registerUser) is called
+    }
+    catch (error) {
       return res.status(400).json({
-        message: "Validation error1",
-        errors: error.errors, 
+        message:
+          "Validation error: " + error.errors.map((e) => e.message).join(", "),
+        errors: error.errors,
       });
     }
   },
-  userController.registerUser,
-  (err, req, res, next) => {
-    console.error("Error:", err);
-    res
-      .status(err.statusCode || 500)
-      .json({ message: err.message || "Something went wrong" });
-  }
-); 
+  registerUser // Ensure this is a valid function
+);
 
+// Login route
 router.post(
   "/login",
   async (req, res, next) => {
@@ -36,7 +38,7 @@ router.post(
     try {
       const parsedData = loginSchema.parse({ email, password });
       req.validatedDataLogin = parsedData;
-      next(); 
+      return next(); // Ensures the next middleware (userController.loginUser) is called
     } catch (error) {
       return res.status(400).json({
         message: "Invalid Email or password",
@@ -44,13 +46,14 @@ router.post(
       });
     }
   },
-  userController.loginUser,
-  (err, req, res, next) => {
-    console.error("Error:", err);
-    res
-      .status(err.statusCode || 500)
-      .json({ message: err.message || "Something went wrong" });
-  }
-); 
+  loginUser // Ensure this is a valid function
+);
+
+// Profile route
+router.get("/profile", authUser, getUserProfile);
+router.get("/logout", authUser, logoutUser);
+
+
+
 
 module.exports = router;
