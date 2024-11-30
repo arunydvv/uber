@@ -38,7 +38,6 @@ A full-stack Uber clone application featuring real-time functionality for **User
 
 ### Prerequisites  
 - Node.js (v18+)  
-- Docker (optional for containerized setup)  
 
 ### Steps  
 1. Clone the repository:  
