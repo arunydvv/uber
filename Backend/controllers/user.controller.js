@@ -14,9 +14,6 @@ const registerUser = async (req, res, next) => {
     const token = user.generateAuthToken();
     res.status(200).json({ token, user }); // Changed to 200 for authentication success
   } catch (error) {
-    if (process.env.NODE_ENV === "development") {
-      console.error(error.stack); // Log the error stack in development
-    }
     res.status(error.status || 500).json({
       error: error.message || "Server Error",
     });
@@ -40,9 +37,6 @@ const loginUser = async (req, res) => {
     
     res.status(200).json({ token, user }); // Changed to 200 for authentication success
   } catch (error) {
-    if (process.env.NODE_ENV === "development") {
-      console.error(error.stack); // Log the error stack in development
-    }
     res.status(error.status || 500).json({
       error: error.message || "Server Error",
     });

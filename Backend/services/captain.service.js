@@ -1,8 +1,9 @@
+const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const { captainModel } = require("../models/captain.model");
 
 const createCaptain = async ({ fullname, email, password, color, model, plate, capacity, vehicle }) => {
-  const existingUser = await userModel.findOne({ email });
+  const existingUser = await captainModel.findOne({ email });
   if (existingUser) {
     throw new Error("User already exists with this email.");
   }
@@ -16,6 +17,13 @@ const createCaptain = async ({ fullname, email, password, color, model, plate, c
     },
     email,
     password: hashedPassword,
+    vehicle: {
+      color,
+      model,
+      plate,
+      capacity,
+      vehicleType: vehicle,
+    },
   });
 
   return user;
@@ -24,3 +32,4 @@ const createCaptain = async ({ fullname, email, password, color, model, plate, c
 module.exports = {
   createCaptain
 };
+

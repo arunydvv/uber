@@ -34,7 +34,7 @@ const captainSchema = z.object({
     .enum(["active", "inactive"], {
       errorMap: () => ({ message: "Status must be 'active' or 'inactive'" }),
     })
-    .default("inactive"), // Status with default value
+    .default("inactive"), 
   vehicle: vehicleSchema, // Embeds the vehicle schema
 });
 
