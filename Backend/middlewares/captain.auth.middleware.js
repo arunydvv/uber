@@ -1,15 +1,14 @@
 const blackListTokenModel = require("../models/blackListToken.model");
-const { userModel } = require("../models/user.model");
+const { captainModel } = require("../models/captain.model");
 const jwt = require("jsonwebtoken");
 
-const authUser = async (req, res, next) => {
+const authCaptain = async (req, res, next) => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
 
   if (!token) {
     return res.status(401).json({ message: "Unauthorized: No token provided" });
   }
 
-  // Check if the token is blacklisted
   const isBlackListed = await blackListTokenModel.findOne({ token });
   if (isBlackListed) {
     return res.status(403).json({ message: "Token is blacklisted" });
@@ -20,7 +19,7 @@ const authUser = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Check if the user exists based on the decoded ID
-    const user = await userModel.findOne({ _id: decoded._id });
+    const user = await captainModel.findOne({ _id: decoded._id });
     if (!user) {
       return res.status(401).json({ message: "User not found" });
     }
