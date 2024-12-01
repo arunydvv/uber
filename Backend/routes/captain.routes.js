@@ -24,7 +24,7 @@ router.post(
         status,
         vehicle,
       });
-      req.validatedData = parsedData;
+      req.validatedData = parsedData; // Pass validated data to the next middleware
       return next();
     } catch (error) {
       return res.status(400).json({
@@ -44,7 +44,7 @@ router.post(
     const { email, password } = req.body;
     try {
       const parsedData = loginSchema.parse({ email, password });
-      req.validatedDataLogin = parsedData;
+      req.validatedDataLogin = parsedData; // Pass validated data for login
       return next();
     } catch (error) {
       return res.status(400).json({
@@ -63,4 +63,3 @@ router.get("/profile", authCaptain, getCaptainProfile);
 router.get("/logout", authCaptain, logoutCaptain);
 
 module.exports = router;
-

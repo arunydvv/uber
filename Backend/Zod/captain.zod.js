@@ -6,8 +6,8 @@ const fullnameSchema = z.object({
 });
 
 const locationSchema = z.object({
-  latitude: z.number().optional(), // Latitude is optional
-  longitude: z.number().optional(), // Longitude is optional
+  latitude: z.number().optional(), 
+  longitude: z.number().optional(),
 });
 
 const vehicleSchema = z.object({
@@ -44,3 +44,20 @@ module.exports = {
   vehicleSchema,
   captainSchema,
 };
+
+// {
+//   "fullname": {
+//     "firstname": "John",
+//     "lastname": "Doe"
+//   },
+//   "email": "john.doe@example.com",
+//   "password": "password123",
+//   "vehicle": {
+//     "color": "red",
+//     "plate": "ABC1234",
+//     "capacity": 4,
+//     "vehicleType": "car",
+
+//   }
+// }
+

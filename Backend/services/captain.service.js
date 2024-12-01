@@ -1,15 +1,20 @@
-const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const { captainModel } = require("../models/captain.model");
+const captainModel = require("../models/captainModel"); // Ensure you have the correct path to your model
 
-const createCaptain = async ({ fullname, email, password, color, model, plate, capacity, vehicle }) => {
+const createCaptain = async ({ fullname, email, password, vehicle }) => {
+  // Check if the user already exists with the provided email
   const existingUser = await captainModel.findOne({ email });
   if (existingUser) {
     throw new Error("User already exists with this email.");
   }
 
+  // Hash the password
   const hashedPassword = await bcrypt.hash(password, 10);
 
+  // Destructure vehicle object for easier handling
+  const { color, plate, capacity, vehicleType } = vehicle;
+
+  // Create the new captain
   const user = await captainModel.create({
     fullname: {
       firstname: fullname.firstname,
@@ -19,10 +24,9 @@ const createCaptain = async ({ fullname, email, password, color, model, plate, c
     password: hashedPassword,
     vehicle: {
       color,
-      model,
       plate,
       capacity,
-      vehicleType: vehicle,
+      vehicleType,
     },
   });
 
@@ -30,6 +34,5 @@ const createCaptain = async ({ fullname, email, password, color, model, plate, c
 };
 
 module.exports = {
-  createCaptain
+  createCaptain,
 };
-
