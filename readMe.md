@@ -1,5 +1,6 @@
-
 # Uber Clone  
+
+![UBER](https://d1a3f4spazzrp4.cloudfront.net/uber-com/1.1.8/d1a3f4spazzrp4.cloudfront.net/images/facebook-shareimage-1-c3462391c9.jpg)
 
 A full-stack Uber clone application featuring real-time functionality for **Users** and **Captains**. This project is designed to demonstrate a scalable architecture, efficient APIs, and an interactive UI for ride-sharing applications.  
 
