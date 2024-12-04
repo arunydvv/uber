@@ -6,12 +6,7 @@ const UserLogin = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [userData, setuserData] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
+ 
 
   const handleHome = () => {
     navigate("/");
@@ -24,6 +19,7 @@ const UserLogin = () => {
       password: password
     })
     console.log("Form submitted with:", { email, password });
+    console.log(userData);
 
   };
 
@@ -66,7 +62,6 @@ const UserLogin = () => {
               id="password"
               type="password"
               value={password}
-              onClick={togglePasswordVisibility}
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
