@@ -8,16 +8,16 @@ import CaptainSignup from "./pages/CaptainSignup.jsx";
 
 const App = () => {
   return (
-    <div>
+    <div className="font-[Poppins]">
       <Routes>
-        <Route path='/' element={<Home/>} /> 
-        <Route path='/login' element={<UserLogin/>} /> 
-        <Route path='/register' element={<UserSignup/>} /> 
-        <Route path='/login' element={<CaptainLogin/>} /> 
-        <Route path='/register' element={<CaptainSignup/>} /> 
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<UserLogin />} />
+        <Route path="/register" element={<UserSignup />} />
+        <Route path="/login" element={<CaptainLogin />} />
+        <Route path="/register" element={<CaptainSignup />} />
       </Routes>
     </div>
-  )
+  );
 }
 
 export default App
