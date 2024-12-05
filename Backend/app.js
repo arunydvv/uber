@@ -15,8 +15,8 @@ app.use(cookieParser());
 
 connectToMongo();
 
-app.use('/users', userRoutes);
-app.use('/captains', captainRoutes);
+app.use('/user', userRoutes);
+app.use('/captain', captainRoutes);
 
 app.get("/", (req, res) => {
     res.status(200).json({ message: "Hello world" });

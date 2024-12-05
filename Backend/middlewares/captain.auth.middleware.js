@@ -1,4 +1,4 @@
-const blackListTokenModel = require("../models/blackListToken.model");
+const BlackListTokenCaptain = require("../models/blackListToken.captain");
 const { captainModel } = require("../models/captain.model");
 const jwt = require("jsonwebtoken");
 
@@ -9,7 +9,7 @@ const authCaptain = async (req, res, next) => {
     return res.status(401).json({ message: "Unauthorized: No token provided" });
   }
 
-  const isBlackListed = await blackListTokenModel.findOne({ token });
+  const isBlackListed = await BlackListTokenCaptain.findOne({ token });
   if (isBlackListed) {
     return res.status(403).json({ message: "Token is blacklisted" });
   }
@@ -29,12 +29,9 @@ const authCaptain = async (req, res, next) => {
     next(); // Proceed to the next middleware or route handler
   } catch (error) {
     console.error("Error during token verification:", error);
-    return res
-      .status(401)
-      .json({ message: "Unauthorized: Invalid or expired token" });
+    return res.status(401).json({ message: "Unauthorized: Invalid or expired token" });
   }
 };
 
-module.exports = {
-  authCaptain,
-};
+module.exports = { authCaptain };
+
