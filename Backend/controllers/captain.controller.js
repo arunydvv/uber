@@ -4,9 +4,9 @@ const blackListTokenModel = require("../models/blackListToken.model");
 
 const registerCaptain = async (req, res, next) => {
   try {
-    const { fullname, email, password, status, vehicle } = req.validatedData;
-
-    // Create the captain using userService
+    const { fullname, email, password, status, vehicle } =
+      req.validatedCaptainData;
+    
     const user = await userService.createCaptain({
       fullname,
       email,
@@ -26,7 +26,7 @@ const registerCaptain = async (req, res, next) => {
 
 const loginCaptain = async (req, res) => {
   try {
-    const { email, password } = req.validatedDataLogin;
+    const { email, password } = req.validatedCaptainDataLogin;
     const user = await captainModel.findOne({ email }).select("+password");
 
     if (!user) {
