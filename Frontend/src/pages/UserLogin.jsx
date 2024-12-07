@@ -14,37 +14,38 @@ const UserLogin = () => {
     navigate("/");
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const userData = {
-      email,
-      password,
-    };
+ const handleSubmit = async (e) => {
+   e.preventDefault();
+   const userData = {
+     email,
+     password,
+   };
 
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/user/login`,
-        userData
-      );
-      console.log(response);
+   try {
+     const response = await axios.post(
+       `${import.meta.env.VITE_BASE_URL}/user/login`,
+       userData
+     );
+     console.log(response);
 
-      if (response.status === 200) {
-        setUser(response.data.user);
-        navigate("/home");
-      }
-    } catch (error) {
-      if (error.response) {
-        const statusCode = error.response.status; 
-        if (statusCode === 401) {
-          alert("Invalid email or password. Please try again.");
-        } else {
-          alert("An error occurred. Please try again later.");
-        }
-      }
-    }
+     if (response.status === 200) {
+       setUser(response.data.user);
+       localStorage.setItem("token", JSON.stringify(response.data.token)); 
+       navigate("/home");
+     }
+   } catch (error) {
+     if (error.response) {
+       const statusCode = error.response.status;
+       if (statusCode === 401) {
+         alert("Invalid email or password. Please try again.");
+       } else {
+         alert("An error occurred. Please try again later.");
+       }
+     }
+   }
 
-    console.log("Form submitted with:", { email, password });
-  };
+   console.log("Form submitted with:", { email, password });
+ };
 
   return (
     <div className="flex flex-col">

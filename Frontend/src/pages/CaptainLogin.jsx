@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { CaptainDataContext } from "../../context/CaptainContext";
+
 
 const CaptainLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [captainData, setCaptainData] = useState("");
- 
+  const { captain, setCaptain } = useContext(UserDataContext);
+
   const handleHome = () => {
     navigate("/");
   };
