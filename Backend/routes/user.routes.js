@@ -12,7 +12,7 @@ router.post(
     try {
       const parsedData = registerSchema.parse({ email, fullname, password });
       req.validatedData = parsedData;
-      return next(); // Ensures the next middleware (userController.registerUser) is called
+      return next(); 
     } catch (error) {
       return res.status(400).json({
         message:
@@ -21,7 +21,7 @@ router.post(
       });
     }
   },
-  registerUser // Ensure this is a valid function
+  registerUser
 );
 
 // Login route
