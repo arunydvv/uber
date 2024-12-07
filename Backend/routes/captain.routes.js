@@ -25,7 +25,7 @@ router.post(
         vehicle,
       });
       req.validatedCaptainData = parsedData;
-
+      
       return next();
     } catch (error) {
       return res.status(400).json({

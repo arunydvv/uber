@@ -11,9 +11,13 @@ const registerUser = async (req, res, next) => {
       email,
       password,
     });
+
     const token = user.generateAuthToken();
-    res.status(200).json({ token, user }); // Changed to 200 for authentication success
+    res.status(200).json({ token, user }); 
   } catch (error) {
+    if(error.statusCode === 409){
+      return res.status(409).json({ message: "User already exists with this email." });
+    }
     res.status(error.status || 500).json({
       error: error.message || "Server Error",
     });

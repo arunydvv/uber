@@ -8,8 +8,8 @@ const UserLogin = () => {
   const [userData, setuserData] = useState("");
  
 
-  const handleHome = () => {
-    navigate("/");
+  const handleNavigation = (route) => {
+    navigate(route);
   };
 
   const handleSubmit = (e) => {
