@@ -39,7 +39,7 @@ const loginUser = async (req, res) => {
     const token = user.generateAuthToken();
     res.cookie('token', token)
     
-    res.status(200).json({ token, user }); // Changed to 200 for authentication success
+    res.status(200).json({ token, user }); 
   } catch (error) {
     res.status(error.status || 500).json({
       error: error.message || "Server Error",
