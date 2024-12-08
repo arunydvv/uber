@@ -49,7 +49,7 @@ const Home = () => {
             </div>
             <button className="w-full  flex items-center h-12 py-2 text-lg bg-[#e8e8e8] text-black rounded-lg hover:bg-zinc-200 transition-colors duration-300 mb-4">
               <span className="w-3 h-3 inline-block mr-2 rounded-full bg-black mx-3 "></span>
-              Back to Home
+              Current Location
             </button>
             <button className="w-full flex items-center h-12 py-2 text-lg bg-[#e8e8e8] text-black rounded-lg hover:bg-zinc-200 transition-colors duration-300 mb-4">
               <span className="w-3 h-3 inline-block mr-2 bg-black mx-3"></span>
@@ -57,7 +57,7 @@ const Home = () => {
             </button>
             <div className="flex justify-between align-center ">
               <button className="w-[45%] flex items-center h-12 py-2 text-lg bg-[#e8e8e8] text-black rounded-lg hover:bg-zinc-200 transition-colors duration-300 mb-4">
-                Back to Home
+                Destination
               </button>
               <button className="w-[45%] flex items-center h-12 py-2 text-lg bg-[#e8e8e8] text-black rounded-lg hover:bg-zinc-200 transition-colors duration-300 mb-4">
                 Back to Home
