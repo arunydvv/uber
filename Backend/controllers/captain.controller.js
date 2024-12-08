@@ -38,7 +38,7 @@ const loginCaptain = async (req, res) => {
     const user = await captainModel.findOne({ email }).select("+password");
       console.log(user);
     if (!user) {
-      return res.status(401).json({ message: "User not found" });
+      return res.status(404).json({ message: "User not found" });
     }
 
     const isMatch = await user.comparePassword(password);

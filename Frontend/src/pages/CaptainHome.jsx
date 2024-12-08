@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const CaptainHome = () => {
+const Home = () => {
   const [pickup, setPickup] = useState("");
   const [dropoff, setDropoff] = useState("");
 
@@ -13,6 +13,7 @@ const CaptainHome = () => {
     <div style={styles.container}>
       <header style={styles.header}>
         <h1 style={styles.logo}>UberClone</h1>
+        <button style={styles.menuButton}>☰</button>
       </header>
 
       <main style={styles.main}>
@@ -40,6 +41,12 @@ const CaptainHome = () => {
           </button>
         </form>
       </main>
+
+      <footer style={styles.footer}>
+        <button style={styles.footerButton}>Home</button>
+        <button style={styles.footerButton}>Activity</button>
+        <button style={styles.footerButton}>Account</button>
+      </footer>
     </div>
   );
 };
@@ -54,7 +61,7 @@ const styles = {
   },
   header: {
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
     padding: "1rem",
     backgroundColor: "#000",
@@ -63,6 +70,13 @@ const styles = {
   logo: {
     margin: 0,
     fontSize: "1.5rem",
+  },
+  menuButton: {
+    background: "none",
+    border: "none",
+    color: "#fff",
+    fontSize: "1.5rem",
+    cursor: "pointer",
   },
   main: {
     flex: 1,
@@ -104,7 +118,20 @@ const styles = {
     borderRadius: "4px",
     cursor: "pointer",
   },
+  footer: {
+    display: "flex",
+    justifyContent: "space-around",
+    padding: "1rem",
+    backgroundColor: "#000",
+  },
+  footerButton: {
+    background: "none",
+    border: "none",
+    color: "#fff",
+    fontSize: "1rem",
+    cursor: "pointer",
+  },
 };
 
-export default CaptainHome;
+export default Home;
 

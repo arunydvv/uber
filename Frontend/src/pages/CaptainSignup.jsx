@@ -42,7 +42,7 @@ const CaptainSignup = () => {
       );
       if (response.status === 200) {
         setCaptain(response.data.user);
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("Captaintoken", response.data.token);
         navigate("/captain/home");
       }
     } catch (error) {

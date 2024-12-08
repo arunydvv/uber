@@ -10,127 +10,59 @@ const Home = () => {
   };
 
   return (
-    <div style={styles.container}>
-      <header style={styles.header}>
-        <h1 style={styles.logo}>UberClone</h1>
-        <button style={styles.menuButton}>☰</button>
+    <div className="flex flex-col min-h-screen bg-gray-100 text-gray-800">
+      <header className="flex justify-between items-center p-4 bg-black text-white">
+        <h1 className="text-xl font-semibold">UberClone</h1>
+        <button className="bg-none border-none text-white text-2xl cursor-pointer">
+          ☰
+        </button>
       </header>
 
-      <main style={styles.main}>
-        <div style={styles.mapPlaceholder}>
+      <main className="flex-1 p-4 flex flex-col items-center">
+        <div className="w-full h-48 bg-gray-300 flex justify-center items-center mb-4">
           <p>Map Placeholder</p>
         </div>
 
-        <form onSubmit={handleSubmit} style={styles.form}>
+        <form
+          onSubmit={handleSubmit}
+          className="w-full max-w-md flex flex-col gap-4"
+        >
           <input
             type="text"
             placeholder="Enter pickup location"
             value={pickup}
             onChange={(e) => setPickup(e.target.value)}
-            style={styles.input}
+            className="w-full p-2 text-lg border border-gray-300 rounded-md"
           />
           <input
             type="text"
             placeholder="Enter drop-off location"
             value={dropoff}
             onChange={(e) => setDropoff(e.target.value)}
-            style={styles.input}
+            className="w-full p-2 text-lg border border-gray-300 rounded-md"
           />
-          <button type="submit" style={styles.button}>
+          <button
+            type="submit"
+            className="w-full p-3 text-lg bg-black text-white rounded-md hover:bg-gray-800 transition-colors"
+          >
             Request Ride
           </button>
         </form>
       </main>
 
-      <footer style={styles.footer}>
-        <button style={styles.footerButton}>Home</button>
-        <button style={styles.footerButton}>Activity</button>
-        <button style={styles.footerButton}>Account</button>
+      <footer className="flex justify-around p-4 bg-black text-white">
+        <button className="bg-none border-none text-white text-lg cursor-pointer">
+          Home
+        </button>
+        <button className="bg-none border-none text-white text-lg cursor-pointer">
+          Activity
+        </button>
+        <button className="bg-none border-none text-white text-lg cursor-pointer">
+          Account
+        </button>
       </footer>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    minHeight: "100vh",
-    backgroundColor: "#f5f5f5",
-    color: "#333",
-  },
-  header: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "1rem",
-    backgroundColor: "#000",
-    color: "#fff",
-  },
-  logo: {
-    margin: 0,
-    fontSize: "1.5rem",
-  },
-  menuButton: {
-    background: "none",
-    border: "none",
-    color: "#fff",
-    fontSize: "1.5rem",
-    cursor: "pointer",
-  },
-  main: {
-    flex: 1,
-    padding: "1rem",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  mapPlaceholder: {
-    width: "100%",
-    height: "200px",
-    backgroundColor: "#e0e0e0",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: "1rem",
-  },
-  form: {
-    width: "100%",
-    maxWidth: "400px",
-    display: "flex",
-    flexDirection: "column",
-    gap: "1rem",
-  },
-  input: {
-    width: "100%",
-    padding: "0.5rem",
-    fontSize: "1rem",
-    border: "1px solid #ccc",
-    borderRadius: "4px",
-  },
-  button: {
-    width: "100%",
-    padding: "0.75rem",
-    fontSize: "1rem",
-    backgroundColor: "#000",
-    color: "#fff",
-    border: "none",
-    borderRadius: "4px",
-    cursor: "pointer",
-  },
-  footer: {
-    display: "flex",
-    justifyContent: "space-around",
-    padding: "1rem",
-    backgroundColor: "#000",
-  },
-  footerButton: {
-    background: "none",
-    border: "none",
-    color: "#fff",
-    fontSize: "1rem",
-    cursor: "pointer",
-  },
 };
 
 export default Home;

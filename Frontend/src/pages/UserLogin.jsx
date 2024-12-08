@@ -37,7 +37,7 @@ const UserLogin = () => {
      if (error.response) {
        const statusCode = error.response.status;
        if (statusCode === 401) {
-         alert("Invalid email or password. Please try again.");
+         alert("Invalid email or password. or User doesn't exist Please try again.");
        } else {
          alert("An error occurred. Please try again later.");
        }
