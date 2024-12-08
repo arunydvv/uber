@@ -3,6 +3,8 @@ const { captainModel } = require("../models/captain.model");
 const blackListTokenModel = require("../models/blackListToken.model");
 
 const registerCaptain = async (req, res, next) => {
+      console.log("user");
+
   try {
     const { fullname, email, password, status, vehicle } =
       req.validatedCaptainData;
@@ -14,10 +16,14 @@ const registerCaptain = async (req, res, next) => {
       status,
       vehicle,
     });
+      console.log(user);
     
     const token = user.generateAuthToken();
     res.status(200).json({ token, user });
-  } catch (error) {
+  }  catch (error) {
+    if(error.statusCode === 409){
+      return res.status(409).json({ message: "User already exists with this email." });
+    }
     res.status(error.status || 500).json({
       error: error.message || "Server Error",
     });
@@ -27,8 +33,10 @@ const registerCaptain = async (req, res, next) => {
 const loginCaptain = async (req, res) => {
   try {
     const { email, password } = req.validatedCaptainDataLogin;
-    const user = await captainModel.findOne({ email }).select("+password");
+      console.log(email, password);
 
+    const user = await captainModel.findOne({ email }).select("+password");
+      console.log(user);
     if (!user) {
       return res.status(401).json({ message: "User not found" });
     }
@@ -37,6 +45,7 @@ const loginCaptain = async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid email / password" });
     }
+      console.log(isMatch);
 
     const token = user.generateAuthToken();
     res.cookie("token", token);

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home.jsx'
+import CaptainHome from "./pages/CaptainHome.jsx";
 import Start from "./pages/Start.jsx";
 import UserLogin from "./pages/UserLogin.jsx";
 import UserSignup from "./pages/UserSignup.jsx";
@@ -14,12 +15,13 @@ const App = () => {
     <div className="font-[Poppins]">
       <Routes>
         <Route path="/" element={<Start />} />
+        
         <Route path="/home" element={<UserProtectedWrapper><Home /></UserProtectedWrapper>} />
         <Route path="/user/logout" element={<UserProtectedWrapper><UserLogout /></UserProtectedWrapper>} />
         <Route path="/user/login" element={<UserLogin />} />
         <Route path="/user/register" element={<UserSignup />} />
 
-
+        <Route path="/captain/home" element={<UserProtectedWrapper><CaptainHome /></UserProtectedWrapper>} />
         <Route path="/captain/login" element={<CaptainLogin />} />
         <Route path="/captain/register" element={<CaptainSignup />} />
       </Routes>
@@ -28,3 +30,6 @@ const App = () => {
 }
 
 export default App
+
+
+

@@ -4,8 +4,12 @@ const {captainModel} = require("../models/captain.model");
 const createCaptain = async ({ fullname, email, password, vehicle }) => {
 
   const existingUser = await captainModel.findOne({ email });
+      console.log(existingUser);
+
   if (existingUser) {
-    throw new Error("User already exists with this email.");
+    const error = new Error("User already exists with this email.");
+    error.statusCode = 409;
+    throw error;
   }
 
   // Hash the password
