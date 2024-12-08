@@ -16,6 +16,7 @@ const App = () => {
     <div className="font-[Poppins]">
       <Routes>
         <Route path="/" element={<Start />} />
+        <Route path="/test" element={<Home />} />
         
         <Route path="/home" element={<UserProtectedWrapper><Home /></UserProtectedWrapper>} />
         <Route path="/user/logout" element={<UserProtectedWrapper><UserLogout /></UserProtectedWrapper>} />
